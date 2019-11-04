@@ -58,22 +58,7 @@ var buffer = require('buffer');
 // creating a client socket
 var client = udp.createSocket('udp4');
 
-// //buffer msg
-// var data = Buffer.from('command');
 
-// client.on('message',function(msg,info){
-//   console.log('Data received from server : ' + msg.toString());
-//   console.log('Received %d bytes from %s:%d\n',msg.length, info.address, info.port);
-// });
-
-// //sending msg
-// client.send(data,PORT,HOST,function(error){
-//   if(error){
-//     client.close();
-//   }else{
-//     console.log('Data sent !!!');
-//   }
-// });
 
 var data1 = Buffer.from('command');
 // var data2 = Buffer.from('battery?');
@@ -84,31 +69,53 @@ client.send(data1,PORT,HOST,function(error){
   	console.error(error)
     client.close();
   }else{
-    console.log('Data sent !!!');
+    console.log('Drone attached');
   }
 });
 
 
-const commands = ['takeoff',
-'speed 10',
-'speed 10',
-'forward 100',
-'forward 100',
-'forward 200',
-'forward 100',
-'land'];
+// const commands = ['takeoff',
+// 'forward 100',
+// 'back 100',
+// 'land'];
 
-commands.forEach((command,i) => {
-	setTimeout(function(){
-	//sending multiple msg
-		client.send(Buffer.from(command),PORT,HOST,function(error){
-		if(error){
-			console.error(error)
-			client.close();
-		}else{
-			console.log(`Commando avviato ${command}`);
-		}
-	});
+// commands.forEach((command,i) => {
+// 	setTimeout(function(){
+// 	//sending multiple msg
+// 		client.send(Buffer.from(command),PORT,HOST,function(error){
+// 		if(error){
+// 			console.error(error)
+// 			client.close();
+// 		}else{
+// 			console.log(`Commando avviato ${command}`);
+// 		}
+// 	});
 
-	},i*5000)
-})
+// 	},i*5000)
+// })
+
+setTimeout(function(){
+  command ="takeoff";
+  client.send(Buffer.from(command),PORT,HOST,function(error){
+    if(error){
+      console.error(error)
+      client.close();
+    }else{
+      console.log(`Commando avviato ${command}`);
+    }
+  });
+},3000)
+
+
+setTimeout(function(){
+  command ="land";
+  client.send(Buffer.from(command),PORT,HOST,function(error){
+    if(error){
+      console.error(error)
+      client.close();
+    }else{
+      console.log(`Commando avviato ${command}`);
+    }
+  });
+ },10000)
+
