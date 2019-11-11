@@ -59,7 +59,6 @@ var buffer = require('buffer');
 var client = udp.createSocket('udp4');
 
 
-
 var data1 = Buffer.from('command');
 // var data2 = Buffer.from('battery?');
 
@@ -69,30 +68,9 @@ client.send(data1,PORT,HOST,function(error){
   	console.error(error)
     client.close();
   }else{
-    console.log('Drone attached');
+    console.log('Drone attached and on sdk mode, you can now send other message to it');
   }
 });
-
-
-// const commands = ['takeoff',
-// 'forward 100',
-// 'back 100',
-// 'land'];
-
-// commands.forEach((command,i) => {
-// 	setTimeout(function(){
-// 	//sending multiple msg
-// 		client.send(Buffer.from(command),PORT,HOST,function(error){
-// 		if(error){
-// 			console.error(error)
-// 			client.close();
-// 		}else{
-// 			console.log(`Commando avviato ${command}`);
-// 		}
-// 	});
-
-// 	},i*5000)
-// })
 
 setTimeout(function(){
   command ="takeoff";
@@ -101,10 +79,36 @@ setTimeout(function(){
       console.error(error)
       client.close();
     }else{
-      console.log(`Commando avviato ${command}`);
+      console.log(`COmmand sended: ${command}`);
     }
   });
 },3000)
+
+
+
+setTimeout(function(){
+  command ="flip l";
+  client.send(Buffer.from(command),PORT,HOST,function(error){
+    if(error){
+      console.error(error)
+      client.close();
+    }else{
+      console.log(`COmmand sended: ${command}`);
+    }
+  });
+},7000)
+
+setTimeout(function(){
+  command ="forward 100";
+  client.send(Buffer.from(command),PORT,HOST,function(error){
+    if(error){
+      console.error(error)
+      client.close();
+    }else{
+      console.log(`COmmand sended: ${command}`);
+    }
+  });
+},12000)
 
 
 setTimeout(function(){
@@ -114,8 +118,32 @@ setTimeout(function(){
       console.error(error)
       client.close();
     }else{
-      console.log(`Commando avviato ${command}`);
+      console.log(`Command sended: ${command}`);
     }
   });
- },10000)
+ },17000)
 
+
+
+
+
+
+// const commands = ['takeoff',
+// 'forward 100',
+// 'back 100',
+// 'land'];
+
+// commands.forEach((command,i) => {
+//  setTimeout(function(){
+//  //sending multiple msg
+//    client.send(Buffer.from(command),PORT,HOST,function(error){
+//    if(error){
+//      console.error(error)
+//      client.close();
+//    }else{
+//      console.log(`Commando avviato ${command}`);
+//    }
+//  });
+
+//  },i*5000)
+// })
